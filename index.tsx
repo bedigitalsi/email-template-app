@@ -1724,7 +1724,7 @@ const SqualoMailUploadModal = ({ isOpen, onClose, brandKey, selectedCountryKeys,
                         }
 
                         // Step 1: Create the newsletter
-                        const createResponse = await fetch('https://corsproxy.io/?https://api.squalomail.com/v1/create-newsletter', {
+                        const createResponse = await fetch('/api/squalomail/create-newsletter', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(payload),
@@ -1756,7 +1756,7 @@ const SqualoMailUploadModal = ({ isOpen, onClose, brandKey, selectedCountryKeys,
                                 sendDate: unixTimestamp.toString(),
                             });
 
-                            const scheduleUrl = `https://corsproxy.io/?https://api.squalomail.com/v1/send-newsletter?${params.toString()}`;
+                            const scheduleUrl = `/api/squalomail/send-newsletter?${params.toString()}`;
 
                             const scheduleResponse = await fetch(scheduleUrl, {
                                 method: 'GET',

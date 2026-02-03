@@ -119,3 +119,47 @@ const port = Number(process.env.PORT) || 4000;
 app.listen(port, () => {
     console.log(`API server ready on http://localhost:${port}`);
 });
+
+// SqualoMail proxy to avoid CORS issues
+app.post('/api/squalomail/create-newsletter', async (req, res) => {
+    try {
+        const response = await fetch('https://api.squalomail.com/v1/create-newsletter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(req.body),
+        });
+        const data = await response.json();
+        res.status(response.status).json(data);
+    } catch (error) {
+        console.error('SqualoMail proxy error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.post('/api/squalomail/schedule-newsletter', async (req, res) => {
+    try {
+        const params = new URLSearchParams(req.body);
+        const response = await fetch('https://api.squalomail.com/v1/schedule-newsletter?' + params.toString(), {
+            method: 'POST',
+        });
+        const data = await response.json();
+        res.status(response.status).json(data);
+    } catch (error) {
+        console.error('SqualoMail schedule proxy error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get('/api/squalomail/send-newsletter', async (req, res) => {
+    try {
+        const params = new URLSearchParams(req.query);
+        const response = await fetch('https://api.squalomail.com/v1/send-newsletter?' + params.toString(), {
+            method: 'GET',
+        });
+        const data = await response.json();
+        res.status(response.status).json(data);
+    } catch (error) {
+        console.error('SqualoMail send proxy error:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
