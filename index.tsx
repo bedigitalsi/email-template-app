@@ -200,7 +200,7 @@ const MARKETS = {
   lt: { key: "lt", displayName: "Lithuania", locale: "lt-LT", currency: "EUR" },
   ee: { key: "ee", displayName: "Estonia", locale: "et-EE", currency: "EUR" },
   lv: { key: "lv", displayName: "Latvia", locale: "lv-LV", currency: "EUR" },
-  bg: { key: "bg", displayName: "Bulgaria", locale: "bg-BG", currency: "BGN" },
+  bg: { key: "bg", displayName: "Bulgaria", locale: "bg-BG", currency: "EUR" },
 };
 
 const SENDER_PROFILES = {
